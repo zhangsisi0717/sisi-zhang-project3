@@ -30,10 +30,14 @@ function getReviewById(id) {
   return ReviewModel.findById(id).exec();
 }
 
-function updateReview(id, content) {
+function updateReview(id, content, rating) {
   const filter = { _id: id };
-  const update = { content: content };
-  return ReviewModel.findOneAndUpdate(filter, update, { new: true });
+  const update = { content: content, rating: rating };
+  return ReviewModel.findOneAndUpdate(filter, update, { new: true }).exec();
+}
+
+function deleteReview(id) {
+  return ReviewModel.deleteOne({ _id: id }).exec();
 }
 
 module.exports = {
@@ -43,4 +47,5 @@ module.exports = {
   getAllReviews,
   updateReview,
   getReviewById,
+  deleteReview,
 };

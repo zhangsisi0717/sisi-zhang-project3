@@ -9,13 +9,30 @@ const router = express.Router();
 
 //create a new review
 router.post("/create", auth_middleware, function (request, response) {
-  if (!request.body.content || !request.body.gameTitle) {
-    return response.status(400).send("missing review content or game title.");
+  if (
+    !request.body.content ||
+    !request.body.rating ||
+    !request.body.gameTitle
+  ) {
+    return response
+      .status(400)
+      .send("missing review content, rating or game title.");
+  }
+
+  if (
+    !Number.isInteger(request.body.rating) ||
+    request.body.rating < 0 ||
+    request.body.rating > 5
+  ) {
+    return response
+      .status(400)
+      .send("Error: rating must be an integer between 0 and 5.");
   }
 
   const newReview = {
     username: request.username,
     content: request.body.content,
+    rating: request.body.rating,
     gameTitle: request.body.gameTitle,
   };
 
@@ -39,9 +56,18 @@ router.post("/create", auth_middleware, function (request, response) {
 
 // edit the content of a review
 router.post("/edit", auth_middleware, function (request, response) {
-  if (!request.body.content || !request.body.id) {
-    return response.status(400).send("missing review content or review id.");
+  if (request.body.rating) {
+    if (
+      !Number.isInteger(request.body.rating) ||
+      request.body.rating < 0 ||
+      request.body.rating > 5
+    ) {
+      return response
+        .status(400)
+        .send("Error: rating must be an integer between 0 and 5.");
+    }
   }
+
   return ReviewModel.getReviewById(request.body.id)
     .then((review) => {
       if (!review) {
@@ -49,7 +75,15 @@ router.post("/edit", auth_middleware, function (request, response) {
       } else if (review.username != request.username) {
         throw new Error("Unauthorized");
       }
-      return ReviewModel.updateReview(request.body.id, request.body.content);
+
+      const newContent = request.body.content
+        ? request.body.content
+        : review.content;
+      const newRating = request.body.rating
+        ? request.body.rating
+        : review.rating;
+
+      return ReviewModel.updateReview(request.body.id, newContent, newRating);
     })
     .then((dbResponse) => {
       return response.status(200).send(dbResponse);
@@ -61,6 +95,34 @@ router.post("/edit", auth_middleware, function (request, response) {
         return response
           .status(401)
           .send("Cannot edit review created by another user.");
+      }
+      return response.status(400).send(error);
+    });
+});
+
+router.post("/delete", auth_middleware, function (request, response) {
+  if (!request.body.id) {
+    return response.status(400).send("missing review id.");
+  }
+  return ReviewModel.getReviewById(request.body.id)
+    .then((review) => {
+      if (!review) {
+        throw new Error("NotFound");
+      } else if (review.username != request.username) {
+        throw new Error("Unauthorized");
+      }
+      return ReviewModel.deleteReview(request.body.id);
+    })
+    .then((dbResponse) => {
+      return response.status(200).send(dbResponse);
+    })
+    .catch((error) => {
+      if (error.message == "NotFound") {
+        return response.status(400).send("Review not found.");
+      } else if (error.message == "Unauthorized") {
+        return response
+          .status(401)
+          .send("Cannot delete review created by another user.");
       }
       return response.status(400).send(error);
     });

@@ -9,6 +9,7 @@ const ReviewSchema = new Schema(
       type: Date,
       default: Date.now,
     },
+    rating: Number,
   },
   {
     collection: "reviews",
