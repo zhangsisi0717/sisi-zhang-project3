@@ -28,6 +28,10 @@ function getAllGames() {
   return GameModel.find().exec();
 }
 
+function searchGames(word) {
+  return GameModel.find({ title: { $regex: word, $options: "i" } }).exec();
+}
+
 function updateGame(title, description) {
   const filter = { title: title };
   const update = { description: description };
@@ -46,4 +50,5 @@ module.exports = {
   getGameByTitle,
   updateGame,
   deleteGameByTitle,
+  searchGames,
 };

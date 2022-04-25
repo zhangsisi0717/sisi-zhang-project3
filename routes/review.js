@@ -16,7 +16,15 @@ router.post("/create", auth_middleware, function (request, response) {
   ) {
     return response
       .status(400)
-      .send("missing review content, rating or game title.");
+      .send("missing review content, rating or gameTitle.");
+  }
+
+  if (typeof request.body.content !== "string") {
+    return response.status(400).send("content must be a string.");
+  }
+
+  if (typeof request.body.gameTitle !== "string") {
+    return response.status(400).send("gameTitle must be a string.");
   }
 
   if (
@@ -65,6 +73,12 @@ router.post("/edit", auth_middleware, function (request, response) {
       return response
         .status(400)
         .send("Error: rating must be an integer between 0 and 5.");
+    }
+  }
+
+  if (request.body.content) {
+    if (typeof request.body.content !== "string") {
+      return response.status(400).send("content must be a string.");
     }
   }
 

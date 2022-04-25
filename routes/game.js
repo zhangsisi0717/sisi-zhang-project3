@@ -126,4 +126,31 @@ router.post("/getReviews", function (request, response) {
     });
 });
 
+router.get("/getAll", function (request, response) {
+  return GameModel.getAllGames()
+    .then((dbResponse) => {
+      return response.status(200).send(dbResponse);
+    })
+    .catch((error) => {
+      response.status(400).send(error.message);
+    });
+});
+
+router.post("/search", function (request, response) {
+  if (!request.body.query) {
+    return response.status(400).send("Missing query.");
+  }
+  if (typeof request.body.query !== "string") {
+    return response.status(400).send("query must be a string.");
+  }
+
+  return GameModel.searchGames(request.body.query)
+    .then((dbResponse) => {
+      return response.status(200).send(dbResponse);
+    })
+    .catch((error) => {
+      response.status(400).send(error.message);
+    });
+});
+
 module.exports = router;

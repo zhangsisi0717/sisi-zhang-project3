@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const auth_middleware = require("./middleware/auth_middleware");
 const router = express.Router();
 
+// configs for password hashing
 const hashConfig = {
   iter: 10000,
   keyLen: 256,
