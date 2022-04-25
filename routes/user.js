@@ -14,6 +14,10 @@ router.post("/authenticate", function (request, response) {
 
   return UserModel.getUserByUserName(username)
     .then((user) => {
+      if (!user) {
+        // user not found
+        return response.status(401).send("User does not exists.");
+      }
       if (user.password === password) {
         const payload = {
           username: username,
@@ -28,10 +32,11 @@ router.post("/authenticate", function (request, response) {
           .send({ username });
       }
 
-      return response.status(401).send("Invalid password");
+      return response.status(401).send("Invalid password.");
     })
     .catch((error) => {
-      response.status(400).send("There was an error");
+      console.log(error);
+      response.status(400).send("There was an error.");
     });
 });
 
@@ -48,20 +53,20 @@ router.get("/isLoggedIn", auth_middleware, function (request, response) {
   return response.status(200).send({ username: request.username });
 });
 
-router.get("/:username", function (request, response) {
-  const username = request.params.username;
+// router.get("/getUser/:username", function (request, response) {
+//   const username = request.params.username;
 
-  return UserModel.getUserByUserName(username)
-    .then((user) => {
-      response.status(200).send(user);
-    })
-    .catch((error) => {
-      response.status(400).send(error);
-    });
-});
+//   return UserModel.getUserByUserName(username)
+//     .then((user) => {
+//       response.status(200).send(user);
+//     })
+//     .catch((error) => {
+//       response.status(400).send(error);
+//     });
+// });
 
 //create user
-router.post("/", function (request, response) {
+router.post("/create", function (request, response) {
   console.log("api/user called");
   const { username, password } = request.body;
 

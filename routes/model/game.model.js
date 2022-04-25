@@ -2,35 +2,48 @@ const mongoose = require("mongoose");
 
 const GameSchema = require("../schema/game.schema");
 
-const ReviewModel = mongoose.model("Game", GameSchema);
+const GameModel = mongoose.model("Game", GameSchema);
 
 function createGame(game) {
-  return ReviewModel.create(game).exec();
+  return GameModel.create(game);
 }
 
-// function getReviewByUsername(username) {
-//   return ReviewModel.find({
-//     username: username,
-//   }).exec();
-// }
+function getGameByUsername(username) {
+  return GameModel.find({
+    username: username,
+  }).exec();
+}
 
-// function getAllReviews() {
-//   return ReviewModel.find().exec();
-// }
+function getGameById(id) {
+  return GameModel.findById(id).exec();
+}
 
-// function getReviewById(id) {
-//   return ReviewModel.findById(id).exec();
-// }
+function getGameByTitle(title) {
+  return GameModel.findOne({
+    title: title,
+  }).exec();
+}
 
-// function updateReview(id, content) {
-//   const filter = { _id: id };
-//   const update = { content: content };
-//   return ReviewModel.findOneAndUpdate(filter, update);
-// }
+function getAllGames() {
+  return GameModel.find().exec();
+}
+
+function updateGame(title, description) {
+  const filter = { title: title };
+  const update = { description: description };
+  return GameModel.findOneAndUpdate(filter, update, { new: true });
+}
+
+function deleteGameByTitle(title) {
+  return GameModel.deleteOne({ title: title });
+}
 
 module.exports = {
   createGame,
-  //   getReviewByUsername,
-  //   getAllReviews,
-  //   getReviewById,
+  getGameByUsername,
+  getGameById,
+  getAllGames,
+  getGameByTitle,
+  updateGame,
+  deleteGameByTitle,
 };

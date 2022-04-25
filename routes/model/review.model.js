@@ -5,7 +5,7 @@ const ReviewSchema = require("../schema/review.schema");
 const ReviewModel = mongoose.model("Review", ReviewSchema);
 
 function createReview(review) {
-  return ReviewModel.create(review).exec();
+  return ReviewModel.create(review);
 }
 
 function getReviewByUsername(username) {
@@ -18,6 +18,12 @@ function getAllReviews() {
   return ReviewModel.find().exec();
 }
 
+function getReviewsByGameTitle(gameTitle) {
+  return ReviewModel.find({
+    gameTitle: gameTitle,
+  }).exec();
+}
+
 function getReviewById(id) {
   return ReviewModel.findById(id).exec();
 }
@@ -25,12 +31,14 @@ function getReviewById(id) {
 function updateReview(id, content) {
   const filter = { _id: id };
   const update = { content: content };
-  return ReviewModel.findOneAndUpdate(filter, update);
+  return ReviewModel.findOneAndUpdate(filter, update, { new: true });
 }
 
 module.exports = {
   createReview,
   getReviewByUsername,
+  getReviewsByGameTitle,
   getAllReviews,
+  updateReview,
   getReviewById,
 };

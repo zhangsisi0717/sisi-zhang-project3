@@ -9,9 +9,10 @@ const app = express();
 // const homeRouter = require("./routes/home");
 const userRouter = require("./routes/user");
 const reviewRouter = require("./routes/review");
-const mongooseEnpoint = "mongodb://127.0.0.1/gamiew_app";
+const gameRouter = require("./routes/game");
+const mongooseEndpoint = "mongodb://127.0.0.1/gamiew_app";
 
-mongoose.connect(mongooseEnpoint, { useNewUrlParser: true });
+mongoose.connect(mongooseEndpoint, { useNewUrlParser: true });
 
 const db = mongoose.connection;
 
@@ -36,7 +37,7 @@ app.use(
 // app.use("/api/home", homeRouter);
 app.use("/gamiew/user", userRouter);
 app.use("/gamiew/review", reviewRouter);
-// app.use("/pokemon", pokemonRoute);
+app.use("/gamiew/game", gameRouter);
 
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));

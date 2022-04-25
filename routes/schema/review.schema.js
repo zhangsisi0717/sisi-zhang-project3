@@ -3,7 +3,7 @@ const Schema = require("mongoose").Schema;
 const ReviewSchema = new Schema(
   {
     content: String,
-    gameId: String,
+    gameTitle: String,
     username: String,
     releaseDate: {
       type: Date,

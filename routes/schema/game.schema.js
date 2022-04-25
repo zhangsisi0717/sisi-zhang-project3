@@ -2,9 +2,12 @@ const Schema = require("mongoose").Schema;
 
 const GameSchema = new Schema(
   {
-    title: String,
+    title: {
+      type: String,
+      unique: true,
+    },
     username: String,
-    reviews: [],
+    description: String,
     releaseDate: {
       type: Date,
       default: Date.now,
