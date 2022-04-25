@@ -1,10 +1,19 @@
 const express = require("express");
 
+const crypto = require("crypto");
+
 const UserModel = require("./model/user.model");
 const ReviewModel = require("./model/review.model");
 const jwt = require("jsonwebtoken");
 const auth_middleware = require("./middleware/auth_middleware");
 const router = express.Router();
+
+const hashConfig = {
+  iter: 10000,
+  keyLen: 256,
+  digest: "sha256",
+  saltLength: 128,
+};
 
 //1. User login to the application using credentials.
 //2. The server verifies the credentials, generates a token and signs it with a secret key, and sends it back to the browser.
@@ -18,7 +27,20 @@ router.post("/authenticate", function (request, response) {
         // user not found
         return response.status(401).send("User does not exists.");
       }
-      if (user.password === password) {
+
+      // crypto.pbkdf2Sync(password, salt, iterations, keylen, digest)
+      // https://nodejs.org/api/crypto.html#cryptopbkdf2syncpassword-salt-iterations-keylen-digest
+      const hash = crypto
+        .pbkdf2Sync(
+          password,
+          user.salt,
+          hashConfig.iter,
+          hashConfig.keyLen,
+          hashConfig.digest
+        )
+        .toString("base64");
+
+      if (user.hash === hash) {
         const payload = {
           username: username,
         };
@@ -74,14 +96,28 @@ router.post("/create", function (request, response) {
     response.status(401).send("Missing username or password argument");
   }
 
+  const salt = crypto.randomBytes(hashConfig.saltLength).toString("base64");
+
+  // crypto.pbkdf2Sync(password, salt, iterations, keylen, digest)
+  // https://nodejs.org/api/crypto.html#cryptopbkdf2syncpassword-salt-iterations-keylen-digest
+  const hash = crypto
+    .pbkdf2Sync(
+      password,
+      salt,
+      hashConfig.iter,
+      hashConfig.keyLen,
+      hashConfig.digest
+    )
+    .toString("base64");
   const user = {
-    username,
-    password,
+    username: username,
+    salt: salt,
+    hash: hash,
   };
 
   return UserModel.createUser(user)
     .then((dbResponse) => {
-      if (dbResponse.password === password) {
+      if (dbResponse.hash === hash) {
         const payload = {
           username: username,
         };
@@ -94,7 +130,7 @@ router.post("/create", function (request, response) {
           .send({ username });
       }
 
-      return response.status(401).send("Invalid password");
+      return response.status(401).send("Invalid hash");
     })
     .catch((error) => {
       response.status(400).send(error);

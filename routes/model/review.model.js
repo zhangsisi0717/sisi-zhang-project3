@@ -21,7 +21,9 @@ function getAllReviews() {
 function getReviewsByGameTitle(gameTitle) {
   return ReviewModel.find({
     gameTitle: gameTitle,
-  }).exec();
+  })
+    .sort([["releaseDate", -1]])
+    .exec();
 }
 
 function getReviewById(id) {

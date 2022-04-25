@@ -6,8 +6,8 @@ const UserSchema = new Schema(
       type: String,
       unique: true,
     },
-    password: String,
-    reviewIds: [String],
+    hash: String,
+    salt: String,
   },
   {
     collection: "users",
