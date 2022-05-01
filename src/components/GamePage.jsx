@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 
 import ReviewEntry from "../components/ReviewEntry";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 
 import "./GamePage.css";
@@ -19,6 +19,12 @@ export default function GamePage() {
   const [isEdit, setIsEdit] = useState(false);
 
   const [newGameDescription, setNewGameDescription] = useState(null);
+
+  const [newReviewRating, setNewReviewRating] = useState(null);
+  const [newReviewContent, setNewReviewContent] = useState(null);
+
+  const ratingInputRef = useRef(null);
+  const contentInputRef = useRef(null);
 
   useEffect(() => {
     Axios.post("/game/get", {
@@ -56,6 +62,25 @@ export default function GamePage() {
     });
   }
 
+  function submitNewReview() {
+    if (!game || !newReviewRating || !newReviewContent) {
+      return;
+    }
+    Axios.post("/review/create", {
+      content: newReviewContent,
+      gameTitle: game.title,
+      rating: newReviewRating,
+    })
+      .then((response) => {
+        setNewReviewContent(null);
+        setNewReviewRating(null);
+        setReviews([response.data, ...reviews]);
+        ratingInputRef.current.value = null;
+        contentInputRef.current.value = null;
+      })
+      .catch((err) => console.log(err.message));
+  }
+
   return (
     <div>
       <NaviBar setUsername={setUsername} />
@@ -74,14 +99,42 @@ export default function GamePage() {
                 defaultValue={game.description}
                 onChange={(e) => setNewGameDescription(e.target.value)}
               />
-              <button onClick={submitEditGame}>submit</button>
+              <button onClick={submitEditGame}>save</button>
+              <button onClick={() => setIsEdit(false)}>cancel</button>
             </div>
           ) : (
             <div>description: {game.description}</div>
           )}
-          {reviews.map((review) => (
-            <ReviewEntry review={review} />
-          ))}
+          <div>
+            <h2>New review </h2>
+            <input
+              type="number"
+              placeholder="Rating (1 to 5)"
+              ref={ratingInputRef}
+              onChange={(e) => {
+                setNewReviewRating(Number.parseInt(e.target.value));
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Content of your review"
+              ref={contentInputRef}
+              onChange={(e) => setNewReviewContent(e.target.value)}
+            />
+            <button onClick={submitNewReview}>Save</button>
+          </div>
+          <div className="reviews">
+            {reviews.map((review, idx) => (
+              <ReviewEntry
+                key={review._id}
+                review={review}
+                username={username}
+                deleteReviewFunction={() => {
+                  setReviews(reviews.filter((ele, index) => index !== idx));
+                }}
+              />
+            ))}
+          </div>
         </div>
       ) : (
         <div>Game not found</div>
