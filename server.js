@@ -35,9 +35,9 @@ app.use(
 
 // app.use(auth_middleware);
 // app.use("/api/home", homeRouter);
-app.use("/gamiew/user", userRouter);
-app.use("/gamiew/review", reviewRouter);
-app.use("/gamiew/game", gameRouter);
+app.use("/user", userRouter);
+app.use("/review", reviewRouter);
+app.use("/game", gameRouter);
 
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));

@@ -1,0 +1,8 @@
+.review-entry {
+  position: absolute;
+  width: 80vw;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border: 1px solid black;
+  border-radius: 5px;
+}

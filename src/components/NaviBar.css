@@ -1,0 +1,155 @@
+.navi-bar {
+  position: absolute;
+  background-color: black;
+  width: 100vw;
+  height: 110px;
+}
+
+.gamiew {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: white;
+  font-size: 50px;
+}
+
+.home-button {
+  position: absolute;
+  background-color: black;
+  border: none;
+  color: white;
+  font-size: 25px;
+  top: 70px;
+  left: 5%;
+  padding: 0px;
+  width: 12vw;
+}
+
+/* .rule-button {
+  position: absolute;
+  background-color: black;
+  border: none;
+  color: white;
+  font-size: 25px;
+  top: 70px;
+  left: 20%;
+  padding: 0px;
+  width: 12vw;
+} */
+
+.search {
+  color: white;
+  background-color: black;
+  position: absolute;
+  left: 18%;
+  top: 69%;
+  width: 20vw;
+  height: 1.5vw;
+  border: white solid 1px;
+  border-radius: 2px;
+}
+
+.home-button:hover {
+  color: black;
+  border-color: black;
+  background-color: white;
+  border-radius: 10px;
+  border-style: solid;
+  cursor: pointer;
+}
+
+.rule-button:hover {
+  color: #92ddc8;
+  border-color: #92ddc8;
+  background-color: white;
+  border-radius: 10px;
+  border-style: solid;
+  cursor: pointer;
+}
+
+.username-text {
+  color: white;
+}
+
+@media (max-width: 1300px) and (min-width: 301px) {
+  .navi-bar {
+    position: absolute;
+    background-color: #92ddc8;
+    width: 100vw;
+    height: 130px;
+  }
+
+  .gamiew {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+    color: white;
+    font-size: 45px;
+  }
+
+  .rule-button {
+    position: absolute;
+    background-color: #92ddc8;
+    border: none;
+    color: white;
+    font-size: 20px;
+    top: 75%;
+    left: 28%;
+    width: 20vw;
+  }
+
+  .home-button {
+    position: absolute;
+    background-color: #92ddc8;
+    border: none;
+    color: white;
+    font-size: 20px;
+    top: 75%;
+    left: 3%;
+    width: 20vw;
+  }
+}
+
+@media (max-width: 300px) {
+  .navi-bar {
+    position: absolute;
+    background-color: #92ddc8;
+    width: 100vw;
+    height: 110px;
+  }
+
+  .gamiew {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+  }
+
+  .rule-button {
+    position: absolute;
+    font-size: 15px;
+    top: 75%;
+    left: 70%;
+    transform: translate(-50%, 0);
+    width: 20vw;
+  }
+
+  .home-button {
+    position: absolute;
+    font-size: 15px;
+    top: 75%;
+    left: 30%;
+    transform: translate(-50%, 0);
+    width: 20vw;
+  }
+
+  .username-text {
+    color: white;
+  }
+}
