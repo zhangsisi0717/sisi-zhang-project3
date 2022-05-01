@@ -9,6 +9,8 @@ export default function NaviBar(props) {
   const { state } = useLocation();
   const [username, setUsername] = useState(null);
 
+  const [query, setQuery] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,6 +34,13 @@ export default function NaviBar(props) {
       .catch((error) => console.log("Error logging out"));
   }
 
+  function search() {
+    if (!query) {
+      return;
+    }
+    navigate("/search/" + encodeURIComponent(query));
+  }
+
   return (
     <div className="navi-bar">
       <div className="gamiew">Gamiew</div>
@@ -39,7 +48,17 @@ export default function NaviBar(props) {
       <a href="/home">
         <button className="home-button">Home</button>
       </a>
-      <input className="search" placeholder="search game here.." />
+      {username ? (
+        <a href="/createGame">
+          <button className="create-game-button">Create new game</button>
+        </a>
+      ) : null}
+      <input
+        className="search"
+        placeholder="search game here.."
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <button onClick={search}>Search</button>
 
       <div className="user-name">
         {username ? (

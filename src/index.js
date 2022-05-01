@@ -6,6 +6,8 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import NaviBar from "./components/NaviBar";
 import GamePage from "./components/GamePage";
+import CreateNewGame from "./components/CreateNewGame";
+import SearchResults from "./components/SearchResults";
 import {
   Router,
   BrowserRouter,
@@ -22,6 +24,8 @@ ReactDOM.render(
         <Route path={"/login"} element={<Login />} />
         <Route path={"/signup"} element={<Signup />} />
         <Route path="/game/:gameTitle" element={<GamePage />} />
+        <Route path="/createGame" element={<CreateNewGame />} />
+        <Route path="/search/:query" element={<SearchResults />} />
       </Routes>
     </BrowserRouter>
   </div>,

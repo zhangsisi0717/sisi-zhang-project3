@@ -6,6 +6,7 @@ import Axios from "axios";
 
 import "./GamePage.css";
 
+import { useNavigate } from "react-router";
 import NaviBar from "../components/NaviBar";
 
 export default function GamePage() {
@@ -25,6 +26,8 @@ export default function GamePage() {
 
   const ratingInputRef = useRef(null);
   const contentInputRef = useRef(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     Axios.post("/game/get", {
@@ -59,6 +62,7 @@ export default function GamePage() {
     }).then((response) => {
       setGame(response.data);
       setIsEdit(false);
+      setNewGameDescription(null);
     });
   }
 
@@ -81,6 +85,17 @@ export default function GamePage() {
       .catch((err) => console.log(err.message));
   }
 
+  function deleteSelf() {
+    if (!game) {
+      return;
+    }
+    Axios.post("/game/delete", { title: game.title })
+      .then(() => {
+        navigate("/home");
+      })
+      .catch((err) => console.log(err.message));
+  }
+
   return (
     <div>
       <NaviBar setUsername={setUsername} />
@@ -88,7 +103,15 @@ export default function GamePage() {
         <div className="game-page">
           {game.username === username && !isEdit ? (
             <div>
-              <button onClick={() => setIsEdit(true)}>Edit</button>
+              <button
+                onClick={() => {
+                  setIsEdit(true);
+                  setNewGameDescription(game.description);
+                }}
+              >
+                Edit
+              </button>
+              <button onClick={deleteSelf}>Delete</button>
             </div>
           ) : null}
           <div> game title: {game.title}</div>
@@ -100,29 +123,38 @@ export default function GamePage() {
                 onChange={(e) => setNewGameDescription(e.target.value)}
               />
               <button onClick={submitEditGame}>save</button>
-              <button onClick={() => setIsEdit(false)}>cancel</button>
+              <button
+                onClick={() => {
+                  setIsEdit(false);
+                  setNewGameDescription(null);
+                }}
+              >
+                cancel
+              </button>
             </div>
           ) : (
             <div>description: {game.description}</div>
           )}
-          <div>
-            <h2>New review </h2>
-            <input
-              type="number"
-              placeholder="Rating (1 to 5)"
-              ref={ratingInputRef}
-              onChange={(e) => {
-                setNewReviewRating(Number.parseInt(e.target.value));
-              }}
-            />
-            <input
-              type="text"
-              placeholder="Content of your review"
-              ref={contentInputRef}
-              onChange={(e) => setNewReviewContent(e.target.value)}
-            />
-            <button onClick={submitNewReview}>Save</button>
-          </div>
+          {username ? (
+            <div>
+              <h2>New review </h2>
+              <input
+                type="number"
+                placeholder="Rating (1 to 5)"
+                ref={ratingInputRef}
+                onChange={(e) => {
+                  setNewReviewRating(Number.parseInt(e.target.value));
+                }}
+              />
+              <input
+                type="text"
+                placeholder="Content of your review"
+                ref={contentInputRef}
+                onChange={(e) => setNewReviewContent(e.target.value)}
+              />
+              <button onClick={submitNewReview}>Save</button>
+            </div>
+          ) : null}
           <div className="reviews">
             {reviews.map((review, idx) => (
               <ReviewEntry

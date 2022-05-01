@@ -29,6 +29,8 @@ export default function ReviewEntry(props) {
       .then((response) => {
         setReview(response.data);
         setIsEdit(false);
+        setNewReviewContent(null);
+        setNewReviewRating(null);
       })
       .catch((err) => console.log(err.message));
   }
@@ -49,7 +51,15 @@ export default function ReviewEntry(props) {
     <div className="review-entry">
       {isEdit || props.username !== review.username ? null : (
         <div>
-          <button onClick={() => setIsEdit(true)}>Edit</button>
+          <button
+            onClick={() => {
+              setIsEdit(true);
+              setNewReviewContent(review.content);
+              setNewReviewRating(review.rating);
+            }}
+          >
+            Edit
+          </button>
           <button onClick={deleteSelf}>Delete</button>
         </div>
       )}
@@ -77,7 +87,15 @@ export default function ReviewEntry(props) {
             onChange={(e) => setNewReviewContent(e.target.value)}
           />
           <button onClick={submitReviewEdit}>save</button>
-          <button onClick={() => setIsEdit(false)}>cancel</button>
+          <button
+            onClick={() => {
+              setIsEdit(false);
+              setNewReviewContent(null);
+              setNewReviewRating(null);
+            }}
+          >
+            cancel
+          </button>
         </div>
       ) : (
         <div>

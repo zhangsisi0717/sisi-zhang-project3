@@ -25,11 +25,15 @@ function getGameByTitle(title) {
 }
 
 function getAllGames() {
-  return GameModel.find().exec();
+  return GameModel.find()
+    .sort([["releaseDate", -1]])
+    .exec();
 }
 
 function searchGames(word) {
-  return GameModel.find({ title: { $regex: word, $options: "i" } }).exec();
+  return GameModel.find({ title: { $regex: word, $options: "i" } })
+    .sort([["releaseDate", -1]])
+    .exec();
 }
 
 function updateGame(title, description) {
