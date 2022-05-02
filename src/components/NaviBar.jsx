@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router";
 import Axios from "axios";
+import controller from "../img/game-controller-gamepad-svgrepo-com.svg";
 import "./NaviBar.css";
 
 export default function NaviBar(props) {
@@ -50,43 +51,53 @@ export default function NaviBar(props) {
       </a>
       {username ? (
         <a href="/createGame">
-          <button className="create-game-button">Create new game</button>
+          <button className="create-game-button">NewGame</button>
         </a>
       ) : null}
-      <input
-        className="search"
-        placeholder="search game here.."
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button onClick={search}>Search</button>
+      <div className="search-bar">
+        <input
+          className="search"
+          placeholder="search game here.."
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button className="search-button" onClick={search}>
+          Search
+        </button>
+      </div>
 
       <div className="user-name">
         {username ? (
           <div>
-            <span className="username-text">{username}</span>
+            <div className="username-display">
+              <img className="username-icon" src={controller} />
+              <div className="username-text">{username}</div>
+            </div>
             <span>
-              <button onClick={logout}>Log Out</button>
+              <button className="logout-button" onClick={logout}>
+                LogOut
+              </button>
             </span>
           </div>
         ) : (
           <div>
-            <span className="username-text">Not logged in</span>
             <span>
               <button
+                className="signup-button"
                 onClick={() => {
                   navigate("/signup");
                 }}
               >
-                Sign Up
+                SignUp
               </button>
             </span>
             <span>
               <button
+                className="login-button"
                 onClick={() => {
                   navigate("/login");
                 }}
               >
-                Log In
+                LogIn
               </button>
             </span>
           </div>

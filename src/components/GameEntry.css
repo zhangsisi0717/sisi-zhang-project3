@@ -5,4 +5,19 @@
   transform: translate(-50%, 0); */
   border: 1px solid black;
   border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  background-color: #faf9fc;
+}
+
+.game-icon {
+  margin: 30px;
+  width: 60px;
+}
+
+.game-title {
+  font-size: 25px;
+  text-decoration: none;
+  color: black;
+  font-style: bold;
 }

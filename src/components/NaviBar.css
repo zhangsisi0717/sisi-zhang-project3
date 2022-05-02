@@ -2,12 +2,12 @@
   position: absolute;
   background-color: black;
   width: 100vw;
-  height: 110px;
+  height: 120px;
 }
 
 .gamiew {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -20,57 +20,111 @@
   background-color: black;
   border: none;
   color: white;
-  font-size: 25px;
-  top: 70px;
-  left: 5%;
+  font-size: 23px;
+  top: 90px;
+  left: 1%;
   padding: 0px;
-  width: 12vw;
+  width: 8vw;
+  transform: translate(0, -50%);
 }
 
-/* .rule-button {
+.signup-button,
+.create-game-button {
   position: absolute;
   background-color: black;
   border: none;
   color: white;
-  font-size: 25px;
-  top: 70px;
-  left: 20%;
+  font-size: 23px;
+  top: 90px;
+  left: 75%;
   padding: 0px;
-  width: 12vw;
-} */
-
-.search {
-  color: white;
-  background-color: black;
-  position: absolute;
-  left: 18%;
-  top: 69%;
-  width: 20vw;
-  height: 1.5vw;
-  border: white solid 1px;
-  border-radius: 2px;
+  width: 10vw;
+  transform: translate(0, -50%);
+  height: 32px;
 }
 
-.home-button:hover {
+.login-button,
+.logout-button {
+  position: absolute;
+  background-color: black;
+  border: none;
+  color: white;
+  font-size: 23px;
+  top: 90px;
+  left: 85%;
+  padding: 0px;
+  width: 10vw;
+  transform: translate(0, -50%);
+  height: 32px;
+}
+
+.search-button {
+  /* position: absolute;/ */
+  background-color: black;
+  border: white solid 1px;
+  border-radius: 2px;
+  color: white;
+  font-size: 20px;
+  padding: 0;
+  width: 8vw;
+  height: 34px;
+}
+.search-button:hover {
   color: black;
-  border-color: black;
+  border: white solid 1px;
+  border-radius: 2px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 2px;
   border-style: solid;
   cursor: pointer;
 }
+.search {
+  color: white;
+  border: white solid 1px;
+  background-color: black;
+  border-radius: 2px;
+  width: 15vw;
+  height: 32px;
+  font-size: 20px;
+  padding: 0;
+}
+.search-bar {
+  background-color: black;
+  position: absolute;
+  left: 10%;
+  top: 90px;
+  display: flex;
+  transform: translate(0, -50%);
+}
 
-.rule-button:hover {
-  color: #92ddc8;
-  border-color: #92ddc8;
-  background-color: white;
-  border-radius: 10px;
+.login-button:hover,
+.logout-button:hover,
+.signup-button:hover,
+.home-button:hover,
+.create-game-button:hover {
+  border-radius: 3px;
   border-style: solid;
+  border: white solid 1px;
   cursor: pointer;
 }
 
 .username-text {
   color: white;
+  font-size: 20px;
+}
+
+.username-icon {
+  width: 30px;
+}
+
+.username-display {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: absolute;
+  top: 10px;
+  transform: translate(-100%, 0);
+  left: 98%;
 }
 
 @media (max-width: 1300px) and (min-width: 301px) {
