@@ -1,6 +1,54 @@
 .login {
   position: absolute;
-  top: 300px;
+  top: 250px;
   left: 50%;
   transform: translate(-50%, 0);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid silver;
+  border-radius: 10px;
+  width: 25vw;
+  height: 300px;
+  gap: 30px;
+  align-items: center;
+  background-color: #faf9fc;
+  justify-content: center;
+}
+
+.password-field,
+.username-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 20vw;
+}
+
+.password-input,
+.username-input {
+  height: 30px;
+  font-size: 20px;
+  background-color: #faf9fc;
+  border: solid black 1px;
+  border-radius: 5px;
+}
+
+.text-prompt {
+  font-size: 20px;
+}
+
+.submit-button {
+  width: 8vw;
+  font-size: 20px;
+  background-color: #faf9fc;
+  border: black solid 1px;
+  border-radius: 5px;
+  margin: 0;
+}
+
+.submit-button:hover {
+  cursor: pointer;
+}
+
+.message {
+  color: red;
 }

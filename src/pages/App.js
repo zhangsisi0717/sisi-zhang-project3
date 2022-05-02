@@ -34,12 +34,12 @@ function App() {
     <div>
       <NaviBar />
       <div className="app">
-        {games.map((game, idx) => (
+        {games.map((game) => (
           // <div>{game.title}</div>
           <GameEntry
             key={game._id}
             game={game}
-            icon={gameIcons[idx % gameIcons.length]}
+            icon={gameIcons[Math.floor(Math.random() * gameIcons.length)]}
           />
         ))}
       </div>

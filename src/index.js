@@ -26,6 +26,7 @@ ReactDOM.render(
         <Route path="/game/:gameTitle" element={<GamePage />} />
         <Route path="/createGame" element={<CreateNewGame />} />
         <Route path="/search/:query" element={<SearchResults />} />
+        <Route path="/search" element={<App />} />
       </Routes>
     </BrowserRouter>
   </div>,

@@ -13,6 +13,12 @@ function Login() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (curUserName) {
+      navigate("/home", { state: { username: curUserName } });
+    }
+  }, [curUserName]);
+
   function submit() {
     console.log(`submitted; username=${username}, password=${password}`);
     if (!username || !password) {
@@ -34,23 +40,29 @@ function Login() {
   return (
     <div>
       <NaviBar setUsername={setCurUserName} />
-      {curUserName ? (
-        <div className="login">already logged in as {curUserName}</div>
-      ) : (
-        <div className="login">
+      <div className="login">
+        <div className="username-field">
+          <div className="text-prompt">Username</div>
           <input
+            className="username-input"
             placeholder="Username"
             onChange={(e) => setUsername(e.target.value)}
           />
+        </div>
+        <div className="password-field">
+          <div className="text-prompt">Password</div>
           <input
+            className="password-input"
             placeholder="Password"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button onClick={submit}>Submit</button>
-          {message ? <div>{message}</div> : <div></div>}
         </div>
-      )}
+        <button className="submit-button" onClick={submit}>
+          Submit
+        </button>
+        {message ? <div className="message">{message}</div> : null}
+      </div>
     </div>
   );
 }

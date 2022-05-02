@@ -12,6 +12,8 @@ export default function CreateNewGame() {
 
   const [gameDescription, setGameDescription] = useState(null);
 
+  const [message, setMessage] = useState(null);
+
   const navigate = useNavigate();
 
   function submitNewGame() {
@@ -22,10 +24,15 @@ export default function CreateNewGame() {
       title: gameTitle,
       description: gameDescription,
     })
-      .then(() => {
-        navigate("/home");
+      .then((response) => {
+        const gameURL = "/game/" + encodeURIComponent(response.data.title);
+        // navigate("/home");
+        navigate(gameURL);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setMessage(err.message);
+      });
   }
 
   return (
@@ -33,18 +40,28 @@ export default function CreateNewGame() {
       <NaviBar setUsername={setUsername} />
       <div className="create-new-game">
         {username ? (
-          <div>
-            <input
-              type="text"
-              placeholder="Game title"
-              onChange={(e) => setGameTitle(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Descriptions"
-              onChange={(e) => setGameDescription(e.target.value)}
-            />
-            <button onClick={submitNewGame}>Save</button>
+          <div className="create-new-game-inner">
+            <div className="title-field">
+              <div className="text-prompt">Game title</div>
+              <textarea
+                className="game-title-input"
+                type="text"
+                onChange={(e) => setGameTitle(e.target.value)}
+              />
+            </div>
+            <div className="description-field">
+              <div className="text-prompt">Description</div>
+              <textarea
+                className="game-description-input"
+                type="text"
+                spellCheck="on"
+                onChange={(e) => setGameDescription(e.target.value)}
+              />
+            </div>
+            <button className="save-button" onClick={submitNewGame}>
+              Save
+            </button>
+            {message ? <div className="new-game-message">{message}</div> : null}
           </div>
         ) : (
           <div>Please log in first</div>

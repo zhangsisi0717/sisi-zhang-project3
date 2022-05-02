@@ -1,6 +1,56 @@
 .signup {
   position: absolute;
-  top: 300px;
+  top: 200px;
   left: 50%;
   transform: translate(-50%, 0);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid silver;
+  border-radius: 10px;
+  width: 25vw;
+  height: 380px;
+  gap: 30px;
+  align-items: center;
+  background-color: #faf9fc;
+  justify-content: center;
+}
+
+.submit-button {
+  width: 8vw;
+  font-size: 20px;
+  background-color: #faf9fc;
+  border: black solid 1px;
+  border-radius: 5px;
+  margin: 0;
+}
+.text-prompt {
+  font-size: 20px;
+}
+
+.password-field,
+.password2-field,
+.username-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 20vw;
+}
+
+.password-input,
+.password2-input,
+.username-input {
+  height: 30px;
+  font-size: 20px;
+  background-color: #faf9fc;
+  border: solid black 1px;
+  border-radius: 5px;
+}
+
+.submit-button:hover {
+  cursor: pointer;
+}
+
+.message {
+  color: red;
+  transform: translate(0, -10px);
 }

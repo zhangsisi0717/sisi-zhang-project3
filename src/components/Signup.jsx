@@ -43,22 +43,36 @@ function Signup() {
         <div className="signup">Already logged in as {curUserName}</div>
       ) : (
         <div className="signup">
-          <input
-            placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            placeholder="Password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            placeholder="Re-enter password"
-            type="password"
-            onChange={(e) => setPassword2(e.target.value)}
-          />
-          <button onClick={submit}>Submit</button>
-          {message ? <div>{message}</div> : <div></div>}
+          <div className="username-field">
+            <div className="text-prompt">Username</div>
+            <input
+              className="username-input"
+              placeholder="Username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="password-field">
+            <div className="text-prompt">Password</div>
+            <input
+              className="password-input"
+              placeholder="Password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="password2-field">
+            <div className="text-prompt">Re-enter Password</div>
+            <input
+              className="password2-input"
+              placeholder="Re-enter password"
+              type="password"
+              onChange={(e) => setPassword2(e.target.value)}
+            />
+          </div>
+          <button className="submit-button" onClick={submit}>
+            Submit
+          </button>
+          {message ? <div className="message">{message}</div> : null}
         </div>
       )}
     </div>

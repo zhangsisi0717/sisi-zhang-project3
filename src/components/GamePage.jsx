@@ -9,7 +9,13 @@ import "./GamePage.css";
 import { useNavigate } from "react-router";
 import NaviBar from "../components/NaviBar";
 
+import gameIcon1 from "../img/game-icon-1.svg";
+import gameIcon2 from "../img/game-icon-2.svg";
+import gameIcon3 from "../img/game-icon-3.svg";
+import gameIcon4 from "../img/game-icon-4.svg";
+
 export default function GamePage() {
+  const gameIcons = [gameIcon1, gameIcon2, gameIcon3, gameIcon4];
   const pathParams = useParams();
   const gameTitle = decodeURIComponent(pathParams.gameTitle);
 
@@ -27,6 +33,8 @@ export default function GamePage() {
   const ratingInputRef = useRef(null);
   const contentInputRef = useRef(null);
 
+  const [icon, setIcon] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,6 +44,7 @@ export default function GamePage() {
       .then((response) => {
         //   console.log(response.data);
         setGame(response.data);
+        setIcon(gameIcons[Math.floor(Math.random() * gameIcons.length)]);
       })
       .catch((err) => {
         console.log(err.message);
@@ -101,40 +110,67 @@ export default function GamePage() {
       <NaviBar setUsername={setUsername} />
       {game ? (
         <div className="game-page">
-          {game.username === username && !isEdit ? (
-            <div>
-              <button
-                onClick={() => {
-                  setIsEdit(true);
-                  setNewGameDescription(game.description);
-                }}
-              >
-                Edit
-              </button>
-              <button onClick={deleteSelf}>Delete</button>
+          <div className="game-area">
+            <img className="game-title-icon" src={icon} />
+            <div className="game-info-box">
+              <div className="title-field">
+                <div className="game-title-text">
+                  <b>{game.title}</b>
+                </div>
+              </div>
+              {isEdit ? (
+                <div className="description-field">
+                  <div className="description-field-inner">
+                    <div className="text-prompt">Description</div>
+                    <textarea
+                      className="game-description-input"
+                      type="text"
+                      defaultValue={game.description}
+                      onChange={(e) => setNewGameDescription(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <button className="save-button" onClick={submitEditGame}>
+                      save
+                    </button>
+                    <button
+                      className="cancel-button"
+                      onClick={() => {
+                        setIsEdit(false);
+                        setNewGameDescription(null);
+                      }}
+                    >
+                      cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="description-field">
+                  <div className="description-field-inner">
+                    <div className="game-description-text">
+                      {game.description}
+                    </div>
+                  </div>
+                </div>
+              )}
+              {game.username === username && !isEdit ? (
+                <div>
+                  <button
+                    className="edit-button"
+                    onClick={() => {
+                      setIsEdit(true);
+                      setNewGameDescription(game.description);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button className="delete-button" onClick={deleteSelf}>
+                    Delete
+                  </button>
+                </div>
+              ) : null}
             </div>
-          ) : null}
-          <div> game title: {game.title}</div>
-          {isEdit ? (
-            <div>
-              <input
-                type="text"
-                defaultValue={game.description}
-                onChange={(e) => setNewGameDescription(e.target.value)}
-              />
-              <button onClick={submitEditGame}>save</button>
-              <button
-                onClick={() => {
-                  setIsEdit(false);
-                  setNewGameDescription(null);
-                }}
-              >
-                cancel
-              </button>
-            </div>
-          ) : (
-            <div>description: {game.description}</div>
-          )}
+          </div>
           {username ? (
             <div>
               <h2>New review </h2>

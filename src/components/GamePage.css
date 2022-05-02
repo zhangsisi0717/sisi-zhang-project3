@@ -1,12 +1,73 @@
 .game-page {
   position: absolute;
-  top: 300px;
+  top: 200px;
   left: 50%;
   transform: translate(-50%, 0);
+}
+
+.game-area {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.game-info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .reviews {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
+}
+
+.game-title-icon {
+  width: 100px;
+}
+
+.game-title-text {
+  width: 60vw;
+  /* height: 30px; */
+  font-size: 20px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.game-description-text {
+  width: 60vw;
+  font-size: 20px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.description-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.save-button,
+.edit-button,
+.cancel-button,
+.delete-button {
+  width: 8vw;
+  font-size: 20px;
+  background-color: #faf9fc;
+  border: black solid 1px;
+  border-radius: 5px;
+  margin: 0;
+}
+
+.save-button:hover,
+.edit-button:hover,
+.cancel-button:hover {
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+  color: red;
 }
