@@ -49,7 +49,7 @@ export default function CreateNewGame() {
                 onChange={(e) => setGameTitle(e.target.value)}
               />
             </div>
-            <div className="description-field">
+            <div className="description-edit-field">
               <div className="text-prompt">Description</div>
               <textarea
                 className="game-description-input"
