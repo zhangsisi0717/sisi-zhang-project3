@@ -12,6 +12,8 @@ const GameSchema = new Schema(
       type: Date,
       default: Date.now,
     },
+    url: String,
+    publisher: String,
   },
   {
     collection: "games",

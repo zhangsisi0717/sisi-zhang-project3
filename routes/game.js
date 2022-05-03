@@ -9,13 +9,16 @@ const router = express.Router();
 
 //create a new game
 router.post("/create", auth_middleware, function (request, response) {
-  if (!request.body.title || !request.body.description) {
-    return response.status(400).send("missing game title or game description.");
+  if (!request.body.title) {
+    return response.status(400).send("missing game title.");
   }
+
   const newGame = {
     title: request.body.title,
     description: request.body.description,
     username: request.username,
+    publisher: request.body.publisher,
+    url: request.body.url,
   };
 
   return GameModel.createGame(newGame)
@@ -49,8 +52,27 @@ router.post("/get", function (request, response) {
 
 //update a game's description
 router.post("/edit", auth_middleware, function (request, response) {
-  if (!request.body.title || !request.body.description) {
-    return response.status(400).send("missing game title or game description.");
+  if (!request.body.title) {
+    return response.status(400).send("missing game title.");
+  }
+
+  if (
+    !request.body.description &&
+    !request.body.publisher &&
+    !request.body.url
+  ) {
+    return response.status(400).send("missing update data.");
+  }
+
+  let update = {};
+  if (request.body.description) {
+    update.description = request.body.description;
+  }
+  if (request.body.publisher) {
+    update.publisher = request.body.publisher;
+  }
+  if (request.body.url) {
+    update.url = request.body.url;
   }
 
   return GameModel.getGameByTitle(request.body.title)
@@ -61,7 +83,7 @@ router.post("/edit", auth_middleware, function (request, response) {
       if (game.username != request.username) {
         throw new Error("Unauthorized");
       }
-      return GameModel.updateGame(request.body.title, request.body.description);
+      return GameModel.updateGame(request.body.title, update);
     })
     .then((dbResponse) => {
       return response.status(200).send(dbResponse);

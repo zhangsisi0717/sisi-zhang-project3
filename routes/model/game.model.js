@@ -36,9 +36,8 @@ function searchGames(word) {
     .exec();
 }
 
-function updateGame(title, description) {
+function updateGame(title, update) {
   const filter = { title: title };
-  const update = { description: description };
   return GameModel.findOneAndUpdate(filter, update, { new: true });
 }
 
