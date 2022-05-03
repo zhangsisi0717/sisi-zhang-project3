@@ -32,7 +32,7 @@ function getReviewById(id) {
 
 function updateReview(id, content, rating) {
   const filter = { _id: id };
-  const update = { content: content, rating: rating };
+  const update = { content: content, rating: rating, releaseDate: Date.now() };
   return ReviewModel.findOneAndUpdate(filter, update, { new: true }).exec();
 }
 

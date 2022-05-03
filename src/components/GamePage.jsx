@@ -19,6 +19,9 @@ export default function GamePage() {
   const pathParams = useParams();
   const gameTitle = decodeURIComponent(pathParams.gameTitle);
 
+  const [ratingList, setRatingList] = useState([]);
+  const [averageRating, setAverageRating] = useState(null);
+
   const [game, setGame] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [username, setUsername] = useState(null);
@@ -29,7 +32,7 @@ export default function GamePage() {
   const [newGamePublisher, setNewGamePublisher] = useState(null);
   const [newGameUrl, setNewGameUrl] = useState(null);
 
-  const [newReviewRating, setNewReviewRating] = useState(null);
+  const [newReviewRating, setNewReviewRating] = useState(5);
   const [newReviewContent, setNewReviewContent] = useState(null);
 
   const ratingInputRef = useRef(null);
@@ -73,6 +76,24 @@ export default function GamePage() {
       });
   }, []);
 
+  useEffect(() => {
+    if (reviews) {
+      setRatingList(reviews.map((ele) => ele.rating));
+    } else {
+      setRatingList([]);
+    }
+  }, [reviews]);
+
+  useEffect(() => {
+    if (ratingList) {
+      setAverageRating(
+        (ratingList.reduce((a, b) => a + b, 0) / ratingList.length).toFixed(1)
+      );
+    } else {
+      setAverageRating(null);
+    }
+  }, [ratingList]);
+
   function submitEditGame() {
     if (!game) {
       return;
@@ -100,9 +121,8 @@ export default function GamePage() {
     })
       .then((response) => {
         setNewReviewContent(null);
-        setNewReviewRating(null);
+        setNewReviewRating(5);
         setReviews([response.data, ...reviews]);
-        ratingInputRef.current.value = null;
         contentInputRef.current.value = null;
       })
       .catch((err) => console.log(err.message));
@@ -182,6 +202,14 @@ export default function GamePage() {
                 <div className="description-field">
                   <div className="description-field-inner">
                     <div className="game-description-text">
+                      <b>Rating:</b>{" "}
+                      {reviews.length ? (
+                        <span>{averageRating} / 5.0</span>
+                      ) : (
+                        <span>N/A</span>
+                      )}
+                    </div>
+                    <div className="game-description-text">
                       <b>Updated:</b>{" "}
                       {new Date(game.releaseDate).toLocaleDateString(
                         "en-US",
@@ -222,32 +250,64 @@ export default function GamePage() {
               ) : null}
             </div>
           </div>
+          <div>
+            <hr className="separator" />
+          </div>
           {username ? (
-            <div>
-              <h2>New review </h2>
-              <input
-                type="number"
-                placeholder="Rating (1 to 5)"
-                ref={ratingInputRef}
-                onChange={(e) => {
-                  setNewReviewRating(Number.parseInt(e.target.value));
-                }}
-              />
-              <input
-                type="text"
-                placeholder="Content of your review"
-                ref={contentInputRef}
-                onChange={(e) => setNewReviewContent(e.target.value)}
-              />
-              <button onClick={submitNewReview}>Save</button>
+            <div className="new-review-area">
+              <div className="new-review-prompt">
+                <b>Leave A New Review Here</b>
+              </div>
+              <div className="rating-area">
+                <div className="rating-text">Rating:</div>
+                <select
+                  className="rating-selector"
+                  value={newReviewRating}
+                  onChange={(e) =>
+                    setNewReviewRating(Number.parseFloat(e.target.value))
+                  }
+                >
+                  <option value={5}>5</option>
+                  <option value={4.5}>4.5</option>
+                  <option value={4}>4</option>
+                  <option value={3.5}>3.5</option>
+                  <option value={3}>3</option>
+                  <option value={2.5}>2.5</option>
+                  <option value={2}>2</option>
+                  <option value={1.5}>1.5</option>
+                  <option value={1}>1</option>
+                  <option value={0.5}>0.5</option>
+                </select>
+              </div>
+              <div className="review-detail-area">
+                <div className="detail-text">Details:</div>
+                <textarea
+                  className="review-detail-input"
+                  type="text"
+                  placeholder="Content of your review"
+                  ref={contentInputRef}
+                  onChange={(e) => setNewReviewContent(e.target.value)}
+                />
+              </div>
+              <button className="review-save-button" onClick={submitNewReview}>
+                Save
+              </button>
             </div>
           ) : null}
+          <div>
+            <hr className="separator" />
+          </div>
           <div className="reviews">
             {reviews.map((review, idx) => (
               <ReviewEntry
                 key={review._id}
                 review={review}
                 username={username}
+                updateRatingFunction={(val) => {
+                  setRatingList(
+                    ratingList.map((ele, index) => (index == idx ? val : ele))
+                  );
+                }}
                 deleteReviewFunction={() => {
                   setReviews(reviews.filter((ele, index) => index !== idx));
                 }}

@@ -28,13 +28,13 @@ router.post("/create", auth_middleware, function (request, response) {
   }
 
   if (
-    !Number.isInteger(request.body.rating) ||
+    typeof request.body.rating !== "number" ||
     request.body.rating < 0 ||
     request.body.rating > 5
   ) {
     return response
       .status(400)
-      .send("Error: rating must be an integer between 0 and 5.");
+      .send("Error: rating must be a number between 0 and 5.");
   }
 
   const newReview = {
@@ -66,13 +66,13 @@ router.post("/create", auth_middleware, function (request, response) {
 router.post("/edit", auth_middleware, function (request, response) {
   if (request.body.rating) {
     if (
-      !Number.isInteger(request.body.rating) ||
+      typeof request.body.rating !== "number" ||
       request.body.rating < 0 ||
       request.body.rating > 5
     ) {
       return response
         .status(400)
-        .send("Error: rating must be an integer between 0 and 5.");
+        .send("Error: rating must be a number between 0 and 5.");
     }
   }
 
