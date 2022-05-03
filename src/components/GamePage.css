@@ -25,11 +25,11 @@
   width: 60vw;
 }
 
-/* .reviews {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-} */
+.reviews {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 .game-title-icon {
   width: 100px;
@@ -53,6 +53,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: left;
+  width: 60vw;
 }
 
 .save-button,
@@ -108,7 +109,8 @@
   font-size: 30px;
 }
 
-.new-review-prompt {
+.new-review-prompt,
+.all-review-prompt {
   font-size: 25px;
   margin-top: 0px;
   margin-bottom: 10px;
@@ -151,5 +153,5 @@
 
 .separator {
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }

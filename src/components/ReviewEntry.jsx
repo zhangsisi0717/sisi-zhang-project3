@@ -60,73 +60,106 @@ export default function ReviewEntry(props) {
 
   return (
     <div className="review-entry">
-      {isEdit || props.username !== review.username ? null : (
-        <div>
-          <button
-            onClick={() => {
-              setIsEdit(true);
-              setNewReviewContent(review.content);
-              setNewReviewRating(review.rating);
-            }}
-          >
-            Edit
-          </button>
-          <button onClick={deleteSelf}>Delete</button>
+      <div className="review-entry-inner-area">
+        <div className="user-name-row">
+          <div className="username-and-ts">
+            <b>@{review.username}</b> (last updated:{" "}
+            {new Date(review.releaseDate).toLocaleDateString(
+              "en-US",
+              dateOptions
+            )}
+            )
+          </div>
+          {isEdit || props.username !== review.username ? null : (
+            <div>
+              <button
+                className="review-edit-button"
+                onClick={() => {
+                  setIsEdit(true);
+                  setNewReviewContent(review.content);
+                  setNewReviewRating(review.rating);
+                }}
+              >
+                Edit
+              </button>
+              <button className="review-delete-button" onClick={deleteSelf}>
+                Delete
+              </button>
+            </div>
+          )}
+          {isEdit && props.username === review.username ? (
+            <div>
+              <button className="entry-save-button" onClick={submitReviewEdit}>
+                Save
+              </button>
+              <button
+                className="entry-cancel-button"
+                onClick={() => {
+                  setIsEdit(false);
+                  setNewReviewContent(null);
+                  setNewReviewRating(null);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          ) : null}
         </div>
-      )}
-      <div>Create by: {review.username}</div>
-      <div>
-        Last updated:{" "}
-        {new Date(review.releaseDate).toLocaleDateString("en-US", dateOptions)}
+        {isEdit ? (
+          <div className="entry-rating-row">
+            <span className="entry-rating-text">
+              <b>Rating:</b>
+            </span>
+            <span>
+              <select
+                className="entry-rating-selector"
+                value={newReviewRating}
+                onChange={(e) =>
+                  setNewReviewRating(Number.parseFloat(e.target.value))
+                }
+              >
+                <option value={5}>5</option>
+                <option value={4.5}>4.5</option>
+                <option value={4}>4</option>
+                <option value={3.5}>3.5</option>
+                <option value={3}>3</option>
+                <option value={2.5}>2.5</option>
+                <option value={2}>2</option>
+                <option value={1.5}>1.5</option>
+                <option value={1}>1</option>
+                <option value={0.5}>0.5</option>
+              </select>
+            </span>
+          </div>
+        ) : (
+          <div className="entry-rating-row">
+            <span className="entry-rating-text">
+              <b>Rating:</b>
+            </span>{" "}
+            <span>{review.rating} / 5</span>
+          </div>
+        )}
+        {isEdit ? (
+          <div>
+            <div className="entry-rating-text">
+              <b>Details:</b>
+            </div>
+            <textarea
+              className="entry-review-input"
+              type="text"
+              defaultValue={review.content}
+              onChange={(e) => setNewReviewContent(e.target.value)}
+            />
+          </div>
+        ) : (
+          <div>
+            <div className="entry-rating-text">
+              <b>Details:</b>
+            </div>
+            <div>{review.content}</div>
+          </div>
+        )}
       </div>
-      {isEdit ? (
-        <div>
-          Rating (1 to 5):
-          <select
-            value={newReviewRating}
-            onChange={(e) =>
-              setNewReviewRating(Number.parseFloat(e.target.value))
-            }
-          >
-            <option value={5}>5</option>
-            <option value={4.5}>4.5</option>
-            <option value={4}>4</option>
-            <option value={3.5}>3.5</option>
-            <option value={3}>3</option>
-            <option value={2.5}>2.5</option>
-            <option value={2}>2</option>
-            <option value={1.5}>1.5</option>
-            <option value={1}>1</option>
-            <option value={0.5}>0.5</option>
-          </select>
-        </div>
-      ) : (
-        <div>Rating: {review.rating} / 5</div>
-      )}
-      {isEdit ? (
-        <div>
-          Content:
-          <input
-            type="text"
-            defaultValue={review.content}
-            onChange={(e) => setNewReviewContent(e.target.value)}
-          />
-          <button onClick={submitReviewEdit}>save</button>
-          <button
-            onClick={() => {
-              setIsEdit(false);
-              setNewReviewContent(null);
-              setNewReviewRating(null);
-            }}
-          >
-            cancel
-          </button>
-        </div>
-      ) : (
-        <div>
-          <div>Content: {review.content}</div>
-        </div>
-      )}
     </div>
   );
 }

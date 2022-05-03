@@ -250,9 +250,11 @@ export default function GamePage() {
               ) : null}
             </div>
           </div>
-          <div>
-            <hr className="separator" />
-          </div>
+          {username ? (
+            <div>
+              <hr className="separator" />
+            </div>
+          ) : null}
           {username ? (
             <div className="new-review-area">
               <div className="new-review-prompt">
@@ -296,6 +298,9 @@ export default function GamePage() {
           ) : null}
           <div>
             <hr className="separator" />
+          </div>
+          <div className="all-review-prompt">
+            <b>All Reviews</b>
           </div>
           <div className="reviews">
             {reviews.map((review, idx) => (

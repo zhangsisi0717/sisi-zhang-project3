@@ -5,4 +5,65 @@
   transform: translate(-50%, 0); */
   border: 1px solid black;
   border-radius: 5px;
+  background-color: #faf9fc;
+}
+
+.username-and-ts {
+  font-family: "Courier New", Courier, monospace;
+  /* font-size: 15px; */
+}
+
+.user-name-row {
+  display: flex;
+  flex-direction: row;
+  font-size: 15px;
+  align-items: center;
+}
+
+.review-edit-button,
+.review-delete-button,
+.entry-save-button,
+.entry-cancel-button {
+  border: none;
+  background: none;
+  text-decoration: underline;
+}
+
+.review-edit-button:hover,
+.entry-save-button:hover {
+  cursor: pointer;
+}
+
+.review-delete-button:hover,
+.entry-cancel-button:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.entry-rating-row {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5vw;
+}
+
+.entry-rating-selector {
+  font-size: 12px;
+}
+
+.entry-review-input {
+  width: 100%;
+  height: 100px;
+}
+
+.review-entry-inner-area {
+  margin-left: 0.5vw;
+  margin-right: 1vw;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 8px;
 }
