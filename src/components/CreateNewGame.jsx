@@ -12,17 +12,24 @@ export default function CreateNewGame() {
 
   const [gameDescription, setGameDescription] = useState(null);
 
+  const [gamePublisher, setGamePublisher] = useState(null);
+
+  const [gameUrl, setGameUrl] = useState(null);
+
   const [message, setMessage] = useState(null);
 
   const navigate = useNavigate();
 
   function submitNewGame() {
-    if (!gameTitle || !gameDescription) {
+    if (!gameTitle || !gameDescription || !gamePublisher || !gameUrl) {
+      setMessage("Please fill in all fields.");
       return;
     }
     Axios.post("/game/create", {
       title: gameTitle,
       description: gameDescription,
+      publisher: gamePublisher,
+      url: gameUrl,
     })
       .then((response) => {
         const gameURL = "/game/" + encodeURIComponent(response.data.title);
@@ -47,6 +54,22 @@ export default function CreateNewGame() {
                 className="game-title-input"
                 type="text"
                 onChange={(e) => setGameTitle(e.target.value)}
+              />
+            </div>
+            <div className="title-field">
+              <div className="text-prompt">Publisher</div>
+              <textarea
+                className="game-title-input"
+                type="text"
+                onChange={(e) => setGamePublisher(e.target.value)}
+              />
+            </div>
+            <div className="title-field">
+              <div className="text-prompt">Link</div>
+              <textarea
+                className="game-title-input"
+                type="text"
+                onChange={(e) => setGameUrl(e.target.value)}
               />
             </div>
             <div className="description-edit-field">

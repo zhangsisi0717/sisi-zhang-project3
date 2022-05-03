@@ -74,6 +74,7 @@ router.post("/edit", auth_middleware, function (request, response) {
   if (request.body.url) {
     update.url = request.body.url;
   }
+  update.releaseDate = Date.now();
 
   return GameModel.getGameByTitle(request.body.title)
     .then((game) => {

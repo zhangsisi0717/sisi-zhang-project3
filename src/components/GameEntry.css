@@ -23,5 +23,10 @@
 }
 
 .game-info {
-  width: 55vw;
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }

@@ -26,6 +26,8 @@ export default function GamePage() {
   const [isEdit, setIsEdit] = useState(false);
 
   const [newGameDescription, setNewGameDescription] = useState(null);
+  const [newGamePublisher, setNewGamePublisher] = useState(null);
+  const [newGameUrl, setNewGameUrl] = useState(null);
 
   const [newReviewRating, setNewReviewRating] = useState(null);
   const [newReviewContent, setNewReviewContent] = useState(null);
@@ -36,6 +38,16 @@ export default function GamePage() {
   const [icon, setIcon] = useState(null);
 
   const navigate = useNavigate();
+
+  const dateOptions = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  };
 
   useEffect(() => {
     Axios.post("/game/get", {
@@ -68,6 +80,8 @@ export default function GamePage() {
     Axios.post("/game/edit", {
       title: game.title,
       description: newGameDescription,
+      publisher: newGamePublisher,
+      url: newGameUrl,
     }).then((response) => {
       setGame(response.data);
       setIsEdit(false);
@@ -121,6 +135,24 @@ export default function GamePage() {
               {isEdit ? (
                 <div className="description-field">
                   <div className="description-field-inner">
+                    <div className="text-prompt">Publisher</div>
+                    <textarea
+                      className="game-publisher-input"
+                      type="text"
+                      defaultValue={game.publisher}
+                      onChange={(e) => setNewGamePublisher(e.target.value)}
+                    />
+                  </div>
+                  <div className="description-field-inner">
+                    <div className="text-prompt">Link</div>
+                    <textarea
+                      className="game-url-input"
+                      type="text"
+                      defaultValue={game.url}
+                      onChange={(e) => setNewGameUrl(e.target.value)}
+                    />
+                  </div>
+                  <div className="description-field-inner">
                     <div className="text-prompt">Description</div>
                     <textarea
                       className="game-description-input"
@@ -138,6 +170,8 @@ export default function GamePage() {
                       onClick={() => {
                         setIsEdit(false);
                         setNewGameDescription(null);
+                        setNewGamePublisher(null);
+                        setNewGameUrl(null);
                       }}
                     >
                       cancel
@@ -146,6 +180,21 @@ export default function GamePage() {
                 </div>
               ) : (
                 <div className="description-field">
+                  <div className="description-field-inner">
+                    <div className="game-description-text">
+                      <b>Updated:</b>{" "}
+                      {new Date(game.releaseDate).toLocaleDateString(
+                        "en-US",
+                        dateOptions
+                      )}
+                    </div>
+                    <div className="game-description-text">
+                      <b>Publisher:</b> {game.publisher}
+                    </div>
+                    <div className="game-description-text">
+                      <b>Link:</b> <a href={game.url}>{game.url}</a>
+                    </div>
+                  </div>
                   <div className="description-field-inner">
                     <div className="game-description-text">
                       {game.description}
@@ -160,6 +209,8 @@ export default function GamePage() {
                     onClick={() => {
                       setIsEdit(true);
                       setNewGameDescription(game.description);
+                      setNewGamePublisher(game.publisher);
+                      setNewGameUrl(game.url);
                     }}
                   >
                     Edit
