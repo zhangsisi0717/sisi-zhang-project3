@@ -23,7 +23,8 @@ export default function GameEntry(props) {
           {props.game.title}
         </a>
         <div>
-          <b>Updated:</b> {date.toLocaleDateString("en-US", options)}
+          <b>Updated:</b> {date.toLocaleDateString("en-US", options)} (@
+          {props.game.username})
         </div>
         <div>
           <b>Publisher:</b> {props.game.publisher}

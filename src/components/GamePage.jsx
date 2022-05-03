@@ -214,7 +214,8 @@ export default function GamePage() {
                       {new Date(game.releaseDate).toLocaleDateString(
                         "en-US",
                         dateOptions
-                      )}
+                      )}{" "}
+                      (@{game.username})
                     </div>
                     <div className="game-description-text">
                       <b>Publisher:</b> {game.publisher}
