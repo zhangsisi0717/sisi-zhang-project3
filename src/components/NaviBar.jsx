@@ -57,7 +57,7 @@ export default function NaviBar(props) {
       <div className="search-bar">
         <input
           className="search"
-          placeholder="search game here.."
+          placeholder="search game ..."
           onChange={(e) => setQuery(e.target.value)}
         />
         <button className="search-button" onClick={search}>

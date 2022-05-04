@@ -124,86 +124,266 @@
   position: absolute;
   top: 10px;
   transform: translate(-100%, 0);
-  left: 98%;
+  left: 96%;
 }
 
-@media (max-width: 1300px) and (min-width: 301px) {
-  .navi-bar {
+@media (max-width: 1200px) and (min-width: 950px) {
+  .signup-button,
+  .create-game-button {
     position: absolute;
-    background-color: #92ddc8;
-    width: 100vw;
-    height: 130px;
-  }
-
-  .gamiew {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-      sans-serif;
-    color: white;
-    font-size: 45px;
-  }
-
-  .rule-button {
-    position: absolute;
-    background-color: #92ddc8;
-    border: none;
-    color: white;
-    font-size: 20px;
-    top: 75%;
-    left: 28%;
-    width: 20vw;
-  }
-
-  .home-button {
-    position: absolute;
-    background-color: #92ddc8;
-    border: none;
-    color: white;
-    font-size: 20px;
-    top: 75%;
-    left: 3%;
-    width: 20vw;
+    top: 90px;
+    left: 70%;
+    padding: 0px;
+    width: 10vw;
+    transform: translate(0, -50%);
+    height: 28px;
   }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 950px) and (min-width: 550px) {
+  .search-bar {
+    position: absolute;
+    left: 15%;
+    top: 90px;
+    display: flex;
+    transform: translate(0, -50%);
+  }
+
+  .search-button {
+    border: white solid 1px;
+    border-radius: 2px;
+    font-size: 15px;
+    width: 16vw;
+    height: 30px;
+  }
+
+  .search {
+    border-radius: 1px;
+    width: 30vw;
+    height: 28px;
+    font-size: 15px;
+    padding: 0;
+  }
+  .signup-button,
+  .create-game-button {
+    position: absolute;
+    top: 90px;
+    left: 67%;
+    width: 10vw;
+    transform: translate(0, -50%);
+    height: 28px;
+  }
+}
+
+@media (max-width: 550px) and (min-width: 395px) {
   .navi-bar {
     position: absolute;
-    background-color: #92ddc8;
+    background-color: black;
     width: 100vw;
     height: 110px;
   }
-
   .gamiew {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 30px;
-  }
-
-  .rule-button {
-    position: absolute;
-    font-size: 15px;
-    top: 75%;
-    left: 70%;
-    transform: translate(-50%, 0);
-    width: 20vw;
+    font-size: 35px;
   }
 
   .home-button {
+    font-size: 15px;
+  }
+
+  .signup-button,
+  .create-game-button {
+    font-size: 15px;
+  }
+
+  .login-button,
+  .logout-button {
+    font-size: 15px;
+  }
+
+  .search-bar {
+    position: absolute;
+    left: 15%;
+    top: 90px;
+    display: flex;
+    transform: translate(0, -50%);
+  }
+
+  .search-button {
+    border: white solid 1px;
+    border-radius: 2px;
+    font-size: 15px;
+    width: 16vw;
+    height: 30px;
+  }
+
+  .search {
+    border-radius: 1px;
+    width: 30vw;
+    height: 28px;
+    font-size: 15px;
+    padding: 0;
+  }
+
+  .signup-button,
+  .create-game-button {
     position: absolute;
     font-size: 15px;
-    top: 75%;
-    left: 30%;
-    transform: translate(-50%, 0);
-    width: 20vw;
+    top: 90px;
+    left: 65%;
+    padding: 0px;
+    width: 10vw;
+    transform: translate(0, -50%);
+    height: 28px;
   }
 
   .username-text {
     color: white;
+    font-size: 15px;
+  }
+
+  .username-icon {
+    width: 25px;
+  }
+}
+
+@media (max-width: 395px) {
+  .navi-bar {
+    position: absolute;
+    background-color: black;
+    width: 100vw;
+    height: 110px;
+  }
+  .gamiew {
+    font-size: 35px;
+  }
+
+  .home-button {
+    font-size: 12px;
+  }
+
+  .signup-button,
+  .create-game-button {
+    font-size: 12px;
+  }
+
+  .login-button,
+  .logout-button {
+    font-size: 12px;
+  }
+
+  .search-bar {
+    position: absolute;
+    left: 15%;
+    top: 90px;
+    display: flex;
+    transform: translate(0, -50%);
+  }
+
+  .search-button {
+    border: white solid 1px;
+    border-radius: 2px;
+    font-size: 12px;
+    width: 16vw;
+    height: 28px;
+  }
+
+  .search {
+    border-radius: 1px;
+    width: 30vw;
+    height: 25px;
+    font-size: 12px;
+    padding: 0;
+  }
+
+  .signup-button,
+  .create-game-button {
+    position: absolute;
+    font-size: 12px;
+    top: 90px;
+    left: 65%;
+    padding: 0px;
+    width: 10vw;
+    transform: translate(0, -50%);
+    height: 28px;
+  }
+
+  .username-display {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: absolute;
+    top: 10px;
+    transform: translate(-100%, 0);
+    left: 95%;
+  }
+
+  .username-text {
+    color: white;
+    font-size: 15px;
+  }
+
+  .username-icon {
+    width: 25px;
+  }
+}
+
+@media (max-width: 300px) {
+  .home-button {
+    font-size: 10px;
+  }
+
+  .signup-button,
+  .create-game-button {
+    font-size: 10px;
+  }
+
+  .login-button,
+  .logout-button {
+    font-size: 10px;
+  }
+
+  .search-bar {
+    position: absolute;
+    left: 15%;
+    top: 90px;
+    display: flex;
+    transform: translate(0, -50%);
+  }
+
+  .search-button {
+    border: white solid 1px;
+    border-radius: 2px;
+    font-size: 10px;
+    width: 16vw;
+    height: 22px;
+  }
+
+  .search {
+    border-radius: 1px;
+    width: 29vw;
+    height: 20px;
+    font-size: 10px;
+    padding: 0;
+  }
+
+  .signup-button,
+  .create-game-button {
+    position: absolute;
+    font-size: 10px;
+    top: 90px;
+    left: 65%;
+    padding: 0px;
+    width: 10vw;
+    transform: translate(0, -50%);
+    height: 28px;
+  }
+
+  .username-text {
+    color: white;
+    font-size: 12px;
+  }
+
+  .username-icon {
+    width: 20px;
   }
 }

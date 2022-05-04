@@ -54,3 +54,27 @@
   color: red;
   transform: translate(0, -10px);
 }
+
+@media (max-width: 1000px) {
+  .signup {
+    width: 80vw;
+  }
+
+  .password-field,
+  .password2-field,
+  .username-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 70vw;
+  }
+
+  .submit-button {
+    width: 30vw;
+    font-size: 18px;
+    background-color: #faf9fc;
+    border: black solid 1px;
+    border-radius: 5px;
+    margin: 0;
+  }
+}
