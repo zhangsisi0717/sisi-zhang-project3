@@ -33,7 +33,7 @@
   margin-top: 10px;
 }
 
-.save-button {
+.new-game-save-button {
   width: 8vw;
   font-size: 20px;
   background-color: #faf9fc;
@@ -42,10 +42,16 @@
   margin: 0;
 }
 
-.save-button:hover {
+.new-game-save-button:hover {
   cursor: pointer;
 }
 
 .new-game-message {
   color: red;
 }
+
+/* @media (max-width: 1000px) {
+  .save-button {
+    width: 20vw;
+  }
+} */

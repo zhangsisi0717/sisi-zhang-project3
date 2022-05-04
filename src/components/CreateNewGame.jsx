@@ -81,7 +81,7 @@ export default function CreateNewGame() {
                 onChange={(e) => setGameDescription(e.target.value)}
               />
             </div>
-            <button className="save-button" onClick={submitNewGame}>
+            <button className="new-game-save-button" onClick={submitNewGame}>
               Save
             </button>
             {message ? <div className="new-game-message">{message}</div> : null}

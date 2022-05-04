@@ -141,6 +141,9 @@
 }
 
 @media (max-width: 950px) and (min-width: 550px) {
+  .navi-bar {
+    height: 110px;
+  }
   .search-bar {
     position: absolute;
     left: 15%;
@@ -212,7 +215,7 @@
     border: white solid 1px;
     border-radius: 2px;
     font-size: 15px;
-    width: 16vw;
+    width: 15vw;
     height: 30px;
   }
 
@@ -283,14 +286,14 @@
     border: white solid 1px;
     border-radius: 2px;
     font-size: 12px;
-    width: 16vw;
+    width: 15vw;
     height: 28px;
   }
 
   .search {
     border-radius: 1px;
     width: 30vw;
-    height: 25px;
+    height: 26px;
     font-size: 12px;
     padding: 0;
   }
@@ -354,7 +357,7 @@
     border: white solid 1px;
     border-radius: 2px;
     font-size: 10px;
-    width: 16vw;
+    width: 15vw;
     height: 22px;
   }
 
