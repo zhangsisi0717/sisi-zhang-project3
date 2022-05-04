@@ -30,7 +30,10 @@ export default function GameEntry(props) {
           <b>Publisher:</b> {props.game.publisher}
         </div>
         <div>
-          <b>Link:</b> <a href={props.game.url}>{props.game.url}</a>
+          <b>Link:</b>{" "}
+          <a className="game-link" href={props.game.url}>
+            {props.game.url}
+          </a>
         </div>
         <div>{props.game.description}</div>
       </div>

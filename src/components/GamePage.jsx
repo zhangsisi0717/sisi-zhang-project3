@@ -221,7 +221,10 @@ export default function GamePage() {
                       <b>Publisher:</b> {game.publisher}
                     </div>
                     <div className="game-description-text">
-                      <b>Link:</b> <a href={game.url}>{game.url}</a>
+                      <b>Link:</b>{" "}
+                      <a className="game-link" href={game.url}>
+                        {game.url}
+                      </a>
                     </div>
                   </div>
                   <div className="description-field-inner">

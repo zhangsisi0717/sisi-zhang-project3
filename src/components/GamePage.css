@@ -156,6 +156,19 @@
   margin-bottom: 20px;
 }
 
+.game-link {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
 @media (max-width: 950px) and (min-width: 501px) {
   .save-button,
   .edit-button,
@@ -174,14 +187,11 @@
     width: 70vw;
   }
 
-  .game-title-icon {
-    width: 50px;
-  }
   .game-info-box {
     width: 80vw;
   }
   .game-title-icon {
-    width: 80px;
+    width: 50px;
   }
 
   .save-button,
@@ -239,5 +249,26 @@
     width: 23vw;
     font-size: 15px;
     margin: 0;
+  }
+
+  .game-title-icon {
+    width: 0px;
+  }
+
+  .review-save-button {
+    width: 23vw;
+  }
+  .rating-selector {
+    width: 23vw;
+    font-size: 15px;
+  }
+
+  .rating-text,
+  .detail-text {
+    font-size: 15px;
+  }
+
+  .review-detail-input {
+    font-size: 15px;
   }
 }
