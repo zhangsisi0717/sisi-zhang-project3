@@ -50,8 +50,9 @@
   color: red;
 }
 
-/* @media (max-width: 1000px) {
-  .save-button {
-    width: 20vw;
+@media (max-width: 1000px) {
+  .new-game-save-button {
+    width: 25vw;
+    font-size: 20px;
   }
-} */
+}
