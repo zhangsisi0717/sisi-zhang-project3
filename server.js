@@ -10,7 +10,8 @@ const app = express();
 const userRouter = require("./routes/user");
 const reviewRouter = require("./routes/review");
 const gameRouter = require("./routes/game");
-const mongooseEndpoint = "mongodb://127.0.0.1/gamiew_app";
+const mongooseEndpoint =
+  process.env.MONGODB_URI || "mongodb://127.0.0.1/gamiew_app";
 
 mongoose.connect(mongooseEndpoint, { useNewUrlParser: true });
 
